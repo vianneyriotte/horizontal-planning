@@ -1,7 +1,7 @@
 name: horizontalplanning
 description: To be able to display an horizontal Planning.
 version: 0.0.1
-author: Vianney RIOTTE<vianney.riotte@gmail.com>
+author: Vianney RIOTTE<vianney.riotte@gmail.com
 homepage: https://github.com/vianneyriotte/horizontal-planning.git
 
 environment:

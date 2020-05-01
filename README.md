@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
 
 # TODO List
 
-- Manage display with hour steps (ex. 2h 4h 5h 6h), 
+- Manage display with hour steps (ex. 2h 4h 6h 8h...), 
 - Be able to customize hours labels
 - Events management
 - Be able to customize colors, styles and so on...
