@@ -33,13 +33,14 @@ class MyApp extends StatelessWidget {
           ),
           body: HorizontalPlanning(
             title: "Semaine du 27/04 au 03/05",
-            startHour: 8,
             employees: [
               "Vianney",
               "Stéphane",
             ],
             nbHours: 24,
+            startHour: 8,
             weekDays: ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."],
+            hourStep: 2,
           ),
         ),
       ),

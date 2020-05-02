@@ -13,6 +13,7 @@ class HorizontalPlanning extends StatefulWidget {
   final double dayWidth;
   final double employeeWidth;
   final int margin = 0;
+  final int hourStep;
 
   HorizontalPlanning({
     this.title,
@@ -33,6 +34,7 @@ class HorizontalPlanning extends StatefulWidget {
     this.hourHeight = 20,
     this.dayWidth = 30,
     this.employeeWidth = 60,
+    this.hourStep = 1,
     Key key,
   }) : super(key: key);
 
@@ -224,7 +226,8 @@ class _HorizontalPlanningState extends State<HorizontalPlanning> {
                     child: Column(
                       children: [
                         Container(
-                          width: widget.nbHours * widget.columnHourWidth,
+                          width: (widget.nbHours / widget.hourStep).ceil() *
+                              widget.columnHourWidth,
                           height: hauteurContainer,
                           child: Column(
                             children: List.generate(
@@ -235,7 +238,8 @@ class _HorizontalPlanningState extends State<HorizontalPlanning> {
                                     _buildHoursLine(),
                                     Row(
                                       children: List.generate(
-                                        widget.nbHours,
+                                        (widget.nbHours / widget.hourStep)
+                                            .ceil(),
                                         (index) {
                                           return Column(
                                             children: [
@@ -263,22 +267,27 @@ class _HorizontalPlanningState extends State<HorizontalPlanning> {
   }
 
   Container _buildHoursLine() {
+    // TODO : Bug si ex. pas de 5 sur 24h , et départ à 8h...
     final hours = List.generate(
-        24,
-        (index) => index + widget.startHour >= widget.nbHours
-            ? index + widget.startHour - widget.nbHours
-            : index + widget.startHour);
+        (widget.nbHours / widget.hourStep).ceil(),
+        (index) =>
+            (index * widget.hourStep) + widget.startHour >= widget.nbHours
+                ? (index * widget.hourStep) +
+                    widget.startHour -
+                    (widget.nbHours / widget.hourStep).ceil()
+                : (index * widget.hourStep) + widget.startHour);
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.blueGrey[50],
       ),
-      width: widget.columnHourWidth * widget.nbHours,
+      width: widget.columnHourWidth * (widget.nbHours / widget.hourStep).ceil(),
       height: widget.hourHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(
-          widget.nbHours,
+          hours.length,
           (index) {
             return Container(
               color: Colors.blueGrey[50],
